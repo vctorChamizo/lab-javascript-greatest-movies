@@ -2,18 +2,20 @@
 
 // Iteration 1: Ordering by year - Order by year, ascending (in growing order)
 function orderByYear(list_movies) {
-  if (list_movies.length === 0) return [];
-  return list_movies.sort((a, b) => {
-    if (a.year !== b.year) return a.year - b.year;
-    else return a.title > b.title ? 1 : a.title < b.title ? -1 : 0;
-  });
+  return list_movies.length === 0
+    ? []
+    : list_movies.sort((a, b) => {
+        return a.year !== b.year
+          ? a.year - b.year
+          : a.title.localeCompare(b.title);
+      });
 }
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct
 function howManyMovies(list_movies) {
-  return list_movies.filter(e => {
-    return e.director === "Steven Spielberg" && e.genre.includes("Drama");
-  }).length;
+  return list_movies.filter(
+    e => e.director === "Steven Spielberg" && e.genre.includes("Drama")
+  ).length;
 }
 
 // Iteration 3: Alphabetic Order - Order by title and print the first 20 titles
@@ -45,11 +47,7 @@ function ratesAverage(list_movies) {
 
 // Iteration 5: Drama movies - Get the average of Drama Movies
 function dramaMoviesRate(list_movies) {
-  return ratesAverage(
-    list_movies.filter(e => {
-      return e.genre.includes("Drama");
-    })
-  );
+  return ratesAverage(list_movies.filter(e => e.genre.includes("Drama")));
 }
 
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
@@ -69,7 +67,6 @@ function turnHoursToMinutes(list_movies) {
 
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
 function bestYearAvg(list_movies) {
-
   if (list_movies.length === 0) return null;
 
   let map_years = new Map();
